@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'httparty'
+require 'json'
 
- class Kele
+class Kele
   include HTTParty
   base_uri 'https://www.bloc.io/api/v1'
 
@@ -11,6 +12,11 @@ require 'httparty'
     @auth_token = response["auth_token"]
 
     p "email or password is invalid" if @auth_token == nil
+  end
+
+  def get_me
+    response = self.class.get("https://www.bloc.io/api/v1/users/me", headers: { "authorization" =>  @auth_token })
+    JSON.parse(response.body)
   end
 
 end
