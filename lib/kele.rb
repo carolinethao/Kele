@@ -15,7 +15,7 @@ class Kele
   end
 
   def get_me
-    response = self.class.get("https://www.bloc.io/api/v1/users/me", headers: { "authorization" =>  @auth_token })
+    response = self.class.get("/users/me", headers: { "authorization" =>  @auth_token })
     JSON.parse(response.body)
   end
 
