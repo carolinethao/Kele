@@ -1,11 +1,12 @@
-require 'rubygems'
 require 'httparty'
 require 'json'
 require './lib/roadmap'
+require './lib/messages'
 
 class Kele
   include HTTParty
   include Roadmap
+  include Messages
   base_uri 'https://www.bloc.io/api/v1'
 
   def initialize(email, password)
@@ -26,5 +27,5 @@ class Kele
 
     JSON.parse(response.body).values.flatten.delete_if { |slot| slot["booked"] == true }
   end
-  
+
 end
